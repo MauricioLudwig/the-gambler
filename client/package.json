@@ -14,6 +14,7 @@
   "devDependencies": {
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
     "css-loader": "^3.6.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
@@ -25,7 +26,18 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "antd": "^4.3.5",
+    "axios": "^0.19.2",
+    "history": "^5.0.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "yup": "^0.29.1"
   }
 }
