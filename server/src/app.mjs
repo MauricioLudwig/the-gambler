@@ -10,8 +10,11 @@ import http from 'http';
 import socketio from 'socket.io';
 import jwt from 'jsonwebtoken';
 
+// DB + Routes
 import { db } from './db/index.mjs';
+import './db/games-table.mjs';
 import usersRouter from './routers/users.mjs';
+import gamesRouter from './routers/games.mjs';
 import messagesRouter from './routers/messages.mjs';
 
 const app = express();
@@ -22,6 +25,7 @@ app.use(express.static(publicPath));
 app.use(cors());
 app.use(express.json());
 app.use(usersRouter);
+app.use(gamesRouter);
 app.use(messagesRouter);
 const server = http.createServer(app);
 const io = socketio(server);

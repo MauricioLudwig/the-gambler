@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { createLoadingSelector, createErrorMessageSelector } from '../../utilities/api-selectors';
 import { signOut } from '../../services/auth';
 import { getMessages } from '../../services/messages';
+import { getGames } from '../../services/games';
 import { addMessage } from '../../actions/messages';
 import Home from './home';
 
@@ -20,6 +21,7 @@ export default connect(
   {
     addMessage,
     getMessages,
+    getGames,
     signOut
   }
 )(Home);

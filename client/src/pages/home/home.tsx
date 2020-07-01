@@ -3,6 +3,7 @@ import socketIOClient from 'socket.io-client';
 import { Layout, Button, Typography } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import MessageList from '../../components/message-list';
+import GamesList from '../../components/game-list/game-list-container';
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
@@ -15,12 +16,17 @@ const Home = (props) => {
     signOut,
     signinOut,
     getMessages,
+    getGames,
     loadMessages,
     addMessage
   } = props;
 
+  const fetchInitialData = async () => {
+    await Promise.all([getGames(), getMessages()]);
+  };
+
   useEffect(() => {
-    getMessages();
+    fetchInitialData();
     const socket = socketIOClient(`http://localhost:3000/?token=${user.token}`);
     socket.on('new-message', data => {
       console.log('new message', data);
@@ -57,7 +63,7 @@ const Home = (props) => {
             <MessageList messages={messages} />
           </div>
           <div className="games-container">
-            games conatiner
+            <GamesList />
           </div>
         </Content>
       </Layout>
