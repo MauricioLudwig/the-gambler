@@ -1,15 +1,17 @@
 import express from 'express';
 import { db } from '../db/index.mjs';
+import auth from '../middleware/auth.mjs';
 
 const router = new express.Router();
 
-router.get('messages/user/:id', (req, res) => {
+router.get('/messages', auth, (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.user;
     const messages = db.getMessagesByUserId(id);
+
     res.send(messages);
-  } catch (e) {
-    res.status(400).send(e);
+  } catch ({ message }) {
+    res.status(400).send({ error: message });
   }
 })
 

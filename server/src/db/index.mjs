@@ -5,17 +5,18 @@ import { v4 as uuidv4 } from 'uuid';
 
 class DB {
   constructor(...initialUsers) {
-    const newUsers = initialUsers.map(({ email, password, messages }) => ({
-      id: uuidv4(),
+    const newUsers = initialUsers.map(({ id, email, password, messages }) => ({
+      id,
       email,
       password: bcrypt.hashSync(password, 10),
       level: 1,
-      messages: messages.map(o => ({
+      messages: messages.map(({ text, read }) => ({
         id: uuidv4(),
-        text: o,
-        read: false,
+        text,
+        read,
         date: new Date()
-      }))
+      })),
+      token: []
     }));
 
     this.users = [...newUsers];
@@ -69,28 +70,51 @@ class DB {
 
     user.socketId = socketId;
   }
+
+  findUser(id, token) {
+    return this.users.find(o => o.id === id && o.token.some(t => t === token));
+  }
+
+  saveToken(userId, token) {
+    const user = this.users.find(o => o.id === userId);
+    user.token.push(token);
+  }
+
+  removeToken(userId, token) {
+    const user = this.users.find(o => o.id === userId);
+    user.token = user.token.filter(o => o !== token);
+  }
+
+  debug() {
+    console.log(this.users);
+  }
 }
 
 const mockUser1 = {
-  email: 'franz.kafka@gmail.com',
-  password: 'The Castle',
-  messages: [
-    'x',
-    'y',
-    'z'
-  ]
-};
-
-const mockUser2 = {
-  email: 'Bulgakov',
+  id: '123',
+  email: 'bulgakov@gmail.com',
   password: 'master',
-  messages: [
-    '1',
-    '2',
-    '3'
-  ]
+  messages: [{
+    text: 'Level raised',
+    read: false
+  }, {
+    text: 'Behemoth',
+    read: true
+  }, {
+    text: 'Message from administrator',
+    read: false
+  }, {
+    text: 'Message from administrator',
+    read: false
+  }, {
+    text: 'Level raised',
+    read: true
+  }, {
+    text: 'Margarita',
+    read: false
+  }]
 };
 
-const db = new DB(mockUser1, mockUser2);
+const db = new DB(mockUser1);
 
 export { db };

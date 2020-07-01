@@ -6,4 +6,4 @@ export const createLoadingSelector = actions => state => _(actions)
 export const createErrorMessageSelector = actions => state => _(actions)
   .map(action => _.get(state, `api.error.${action}`))
   .compact()
-  .first() | '';
+  .first() || '';

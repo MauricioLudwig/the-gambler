@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
-import Login from './login';
+import { withRouter } from 'react-router-dom';
 import { createLoadingSelector, createErrorMessageSelector } from '../../utilities/api-selectors';
-import { login } from '../../services/auth';
+import { signIn } from '../../services/auth';
+import Login from './login';
 
 const loading = createLoadingSelector(['LOGIN']);
-const loadingError = createErrorMessageSelector(['LOGIN']);
+const loginError = createErrorMessageSelector(['LOGIN']);
 
 const mapStateToProps = state => ({
   loading: loading(state),
-  loadingError: loadingError(state)
+  loginError: loginError(state)
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
-  { login }
-)(Login);
+  { signIn }
+)(Login));

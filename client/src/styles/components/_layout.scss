@@ -1,22 +1,53 @@
 .header {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  padding: 0 $xs-size;
-}
-
-.header__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 $m-size;
+
+  > h3 {
+    color: #e8e8e8;
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
+  button {
+    margin-right: $xs-size;
+
+    :last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .main-container {
   height: 100%;
-  min-height: calc(100vh - #{$m-size});
-  margin-top: $m-size;
-}
+  min-height: calc(100vh - 64px); // header height
 
-.main-container__content {
-  padding: $xs-size;
+  display: flex;
+  flex-direction: column;
+
+  .messages-container {
+    height: 100%;
+    max-height: 200px;
+
+    @media (min-width: $desktop-breakpoint) {
+      background: #e8e8e8;
+      flex: 4;
+      order: 1;
+      height: 100%;
+      min-height: calc(100vh - 64px);
+    }
+  }
+
+  .games-container {
+    flex: 1;
+
+    @media (min-width: $desktop-breakpoint) {
+      flex: 8;
+    }
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    flex-direction: row;
+  }
 }

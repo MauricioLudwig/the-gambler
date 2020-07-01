@@ -1,16 +1,24 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+import path from 'path';
+const __dirname = path.resolve();
+
 import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import socketio from 'socket.io';
+import jwt from 'jsonwebtoken';
 
 import { db } from './db/index.mjs';
 import usersRouter from './routers/users.mjs';
 import messagesRouter from './routers/messages.mjs';
 
 const app = express();
+const publicPath = path.join(__dirname, 'public');
+
+console.log('publicpath', publicPath);
+app.use(express.static(publicPath));
 app.use(cors());
 app.use(express.json());
 app.use(usersRouter);
@@ -19,16 +27,24 @@ const server = http.createServer(app);
 const io = socketio(server);
 const port = process.env.PORT || 3000;
 
+app.get('', (req, res) => {
+  res.sendFile('index.html');
+});
+
 io.on('connection', (socket) => {
-  console.log('new client connected', socket.id);
+  console.log('new user connected', socket.id);
+  const { token } = socket.handshake.query;
+  console.log('token', token);
 
-  const { userId } = socket.handshake.query;
-  db.storeSocketId(userId, socket.id);
+  if (token) {
+    const { id } = jwt.verify(token, process.env.JWT_SECRET);
+    db.storeSocketId(id, socket.id);
+  }
 
-  socket.on('new-message', (data) => {
+  socket.on('send-message', (data) => {
     const { userId, message } = data;
-    db.addMessage(userId, message);
-    io.to(userId).emit(message);
+    const [socketId, newMessage] = db.addMessage(userId, message);
+    io.to(socketId).emit('new-message', newMessage);
   });
 });
 
