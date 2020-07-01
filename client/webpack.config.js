@@ -12,13 +12,28 @@ module.exports = {
       },
       {
         test: /\.s(a|c)ss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       }
     ]
   },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public', 'dist'),
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -26,6 +41,7 @@ module.exports = {
   devtool: 'eval-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
-    publicPath: '/dist/'
+    publicPath: '/dist/',
+    historyApiFallback: true
   }
 };

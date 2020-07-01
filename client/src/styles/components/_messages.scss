@@ -1,0 +1,51 @@
+.messages-list {
+  display: flex;
+  padding: $s-size;
+  overflow-x: scroll;
+  max-height: calc(100vh - 64px);
+  
+  > div {
+    margin-right: $xs-size;
+
+    :last-child {
+      margin-right: 0;
+    }
+  }
+
+  .messages-list__count {
+    display: none;
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    flex-direction: column;
+
+    > div {
+      margin-right: 0;
+      margin-bottom: $xs-size;
+
+      :last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .messages-list__count {
+      display: block;
+    }
+  
+  }
+}
+
+.messages-list-item {
+  > div {
+    width: 220px;
+  }
+}
+
+.messages-list-item--read {
+  background: whitesmoke;
+  color: gray;
+
+  .ant-card-head {
+    color: gray;
+  }
+}
