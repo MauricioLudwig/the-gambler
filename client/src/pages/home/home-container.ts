@@ -4,6 +4,7 @@ import { signOut } from '../../services/auth';
 import { getMessages } from '../../services/messages';
 import { getGames } from '../../services/games';
 import { addMessage } from '../../actions/messages';
+import { raiseLevel } from '../../actions/auth';
 import Home from './home';
 
 const loadMessages = createLoadingSelector(['GET_MESSAGES']);
@@ -22,6 +23,7 @@ export default connect(
     addMessage,
     getMessages,
     getGames,
-    signOut
+    signOut,
+    raiseLevel
   }
 )(Home);

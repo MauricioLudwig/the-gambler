@@ -50,6 +50,10 @@ io.on('connection', (socket) => {
     const [socketId, newMessage] = db.addMessage(userId, message);
     io.to(socketId).emit('new-message', newMessage);
   });
+
+  socket.on('raise-level', () => {
+    io.sockets.emit('level-raised');
+  });
 });
 
 server.listen(port, () => {

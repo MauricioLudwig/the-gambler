@@ -5,6 +5,16 @@ import auth from '../middleware/auth.mjs';
 
 const router = new express.Router();
 
+router.get('/users/me', auth, (req, res) => {
+  try {
+    const { user: id } = req;
+    const user = db.getUser(id);
+    res.status(200).send(user);
+  } catch ({ message }) {
+    res.status(400).send({ error: message });
+  }
+});
+
 router.post('/users/login', (req, res) => {
   try {
     const { email, password } = req.body;
@@ -25,7 +35,7 @@ router.post('/users/logout', auth, (req, res) => {
     db.debug();
     res.send();
   } catch ({ message }) {
-    res.stats(400).send({ error: message });
+    res.status(400).send({ error: message });
   }
 });
 

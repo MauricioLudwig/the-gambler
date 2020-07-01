@@ -16,6 +16,14 @@ const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...initialState
       }
+    case authActionTypes.RAISE_LEVEL:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          level: state.user.level + 1
+        }
+      }
     default:
       return state;
   }

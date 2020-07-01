@@ -5,7 +5,9 @@ export const authActionTypes = {
 
   LOGOUT_REQUEST: 'LOGOUT_REQUEST',
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
-  LOGOUT_FAILURE: 'LOGOUT_FAILURE'
+  LOGOUT_FAILURE: 'LOGOUT_FAILURE',
+
+  RAISE_LEVEL: 'RAISE_LEVEL'
 };
 
 export const loginRequest = () => ({
@@ -34,4 +36,8 @@ export const logoutSuccess = data => ({
 export const logoutFailure = error => ({
   type: authActionTypes.LOGIN_FAILURE,
   payload: error
+});
+
+export const raiseLevel = () => ({
+  type: authActionTypes.RAISE_LEVEL
 });

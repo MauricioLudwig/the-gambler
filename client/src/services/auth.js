@@ -10,7 +10,8 @@ export const signIn = (email, password) => (dispatch) => {
       dispatch(actions.loginSuccess({
         token,
         user: {
-          email
+          email,
+          level: 1 // TODO get from server
         }
       }));
       return response.data;
