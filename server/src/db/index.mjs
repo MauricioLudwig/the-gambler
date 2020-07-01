@@ -85,6 +85,11 @@ class DB {
     user.token = user.token.filter(o => o !== token);
   }
 
+  getUser(userId) {
+    const { id, password, messages, ...rest } = this.users.find(o => o.id === userId);
+    return { ...rest };
+  }
+
   debug() {
     console.log(this.users);
   }
@@ -92,8 +97,10 @@ class DB {
 
 const mockUser1 = {
   id: '123',
+  name: 'Mikhail Bulgakov',
   email: 'bulgakov@gmail.com',
   password: 'master',
+  level: 1,
   messages: [{
     text: 'Level raised',
     read: false

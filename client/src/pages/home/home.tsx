@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import socketIOClient from 'socket.io-client';
 import { Layout, Button, Typography } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
@@ -18,7 +18,8 @@ const Home = (props) => {
     getMessages,
     getGames,
     loadMessages,
-    addMessage
+    addMessage,
+    raiseLevel
   } = props;
 
   const fetchInitialData = async () => {
@@ -31,7 +32,11 @@ const Home = (props) => {
     socket.on('new-message', data => {
       console.log('new message', data);
       addMessage(data);
-    })
+    });
+
+    socket.on('level-raised', () => {
+      raiseLevel();
+    });
   }, []);
 
   const signoutHandler = () => {
@@ -59,6 +64,9 @@ const Home = (props) => {
       </Header>
       <Layout>
         <Content className="main-container">
+          <div>
+            {user.user.level}
+          </div>
           <div className="messages-container">
             <MessageList messages={messages} />
           </div>

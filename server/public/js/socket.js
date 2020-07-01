@@ -29,4 +29,8 @@ $(document).ready(() => {
       console.log('send-message error', error);
     });
   });
+
+  $('#raise-level-btn').on('click', () => {
+    socket.emit('raise-level');
+  });
 });
