@@ -34,7 +34,36 @@ fixtures data located here -> ./server/src/db/fixtures.mjs
 ```
 
 ### Assumptions
-...
+
+**DB**
+
+Although a db is not specifically requested, it is nonetheless, given the nature of the task, required for some form of storage to exist. For instance, we need to keep track of old messages/events belonging to certain users. It is equally important to gather a prefixed list of games currently available to play, not only for the user to view but also for the admin to remove. Because of this, and due to the existing time contraint, I've opted for a 'mock' db directly in the code, consisting of essentially 3 tables: games, messages and users.
+
+**Authentication**
+
+As mentioned above, a collection of old messages/events (as well as level progression among other things) are required in this application. The aforementioned data is retrieved immediately upon successful login. In this case I've opted for json web tokens. A secret is defined in the env variables to ensure security and (in the case of actual release) can be defined with the hosting company, for example Heroku. Although needless but following good practice, I make sure to hash the passwords before storing them in the 'mock' db.
+
+Note the token is currently stored in the state, meaning the user is automatically logged out upon refresh of the page/application. I've not focused particularly much on this issue but a possible solution would be to use localStorage or better yet a server-side cookie.
+
+If the server ever returns a 401 (unauthorized) a check in the router setup immediately prompts a redirect to the login page.
+
+**Styling**
+
+Styling is part Ant Design and part custom CSS. The styling in the application adheres to mobile first principles.
+
+**API + Web sockets**
+
+I've concluded that the best approach to handling data in the application is to use both API requests as well as web sockets. For instance, upon successful login, the user fetches initial data while a connection is established (from which real-time data is sent back/forth).
+
+Whenever a client successfully logs in, the socket id is stored in the 'mock' db. This permits transmission of messages directly to the client. Upon signing out the socket id is purged from the client's record.
+
+**Time constraint**
+
+Unfortunately I've had to omit unit testing altogether as well as having taken some liberties with TypeScript. In case I would have managed I would have opted for Jest + React-testing-library as well as configure Eslint for even better code management.
+
+**Minute details**
+
+To the observant, you'll notice minute details such as no error message rendered when inserting the wrong email/password combination. Of course such bugs are, in due time, expunged, but, for now they stand, like thorns mockingly pricking at the skin. 
 
 ### Screenshots
 
