@@ -36,6 +36,10 @@ const Home = (props) => {
     socket.on('level-raised', () => {
       raiseLevel();
     });
+
+    return () => {
+      socket.disconnect();
+    }
   }, []);
 
   return (
