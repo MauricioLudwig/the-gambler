@@ -1,0 +1,61 @@
+.login-layout {
+  height: 100vh;
+  width: 100vw;
+  padding-top: $l-size;
+  background: rgb(165,222,255);
+  background: linear-gradient(45deg, rgba(165,222,255,1) 0%, rgba(64,106,145,1) 51%, rgba(5,43,74,1) 100%);
+  
+  footer {
+    position: fixed;
+    bottom: $s-size;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    > p {
+      color: #F8F8F8;
+    }
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+
+    footer > p {
+      font-size: $n-size;
+    }
+  }
+}
+
+.login-layout__container {
+  width: 100%;
+  padding: 0 $m-size;
+
+  > h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: $s-size;
+  }
+
+  label {
+    color: #fff;
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    background: #fff;
+    color: #000;
+    max-width: 35rem;
+    width: 100%;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    padding: $l-size;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.18);
+
+    > h2,
+    label {
+      color: #000;
+    }
+  }
+}

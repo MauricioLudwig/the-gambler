@@ -1,0 +1,9 @@
+.feedback {
+  list-style: none;
+  padding: 0;
+
+  > li {
+    color: $danger;
+    margin-top: 2px;
+  }
+}

@@ -1,0 +1,19 @@
+.games-list-container {
+  padding: $s-size;
+
+  > h4 {
+    color: $steel;
+    font-size: $n-size;
+    margin-bottom: $n-size;
+  }
+}
+
+.game-list-item__card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > small {
+    font-size: $n-size;
+  }
+}

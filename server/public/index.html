@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+  <header>
+    <h3>Magnificent (-ly unsecured) Back Office site</h3>
+  </header>
+
+  <section class="container">
+    <div class="container__box">
+
+      <!-- raise level -->
+      <div class="card card--horizontal">
+        <p>Raise level of all players</p>
+        <button id="raise-level-btn" class="btn">Raise level</button>
+      </div>
+
+      <!-- send message to client -->
+      <div class="card">
+        <p>Send message to client</p>
+        <small class="subtext">List of clients is updated as users log in/out</small>
+        <form id="message-form" class="form--horizontal">
+          <select id="client-list-picker"></select>
+          <input id="message" required placeholder="your message..." />
+          <button type="submit" class="btn">Send message</button>
+        </form>
+      </div>
+
+      <!-- add game -->
+      <div class="card">
+        <p>Add a new game</p>
+        <form id="new-game-form" class="form--horizontal">
+          <input id="game-name" required placeholder="name" />
+          <input id="game-category" required placeholder="category" />
+          <button type="submit" class="btn">Add new game</button>
+        </form>
+      </div>
+
+      <!-- remove game -->
+      <div class="card">
+        <p>Remove game</p>
+        <small class="subtext">List of games will update as you add/remove them (here & for the active clients)</small>
+        <form id="remove-game-form" class="form--horizontal">
+          <select id="game-list-picker"></select>
+          <button type="submit" class="btn">Remove game</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="/js/script.js"></script>
+</body>
+
+</html>
