@@ -19,7 +19,8 @@ const Home = (props) => {
     getMessages,
     getGames,
     raiseLevel,
-    signOut
+    signOut,
+    addGame
   } = props;
 
   const fetchInitialData = async () => {
@@ -29,12 +30,16 @@ const Home = (props) => {
   useEffect(() => {
     fetchInitialData();
     const socket = socketIOClient(`http://localhost:3000/?token=${user.token}`);
-    socket.on('new-message', data => {
+    socket.on('new-message', (data) => {
       addMessage(data);
     });
 
     socket.on('level-raised', () => {
       raiseLevel();
+    });
+
+    socket.on('new-game-added', (data) => {
+      addGame(data);
     });
 
     return () => {

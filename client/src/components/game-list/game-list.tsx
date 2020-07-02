@@ -10,8 +10,7 @@ interface Props {
 interface Game {
   id: number,
   name: string,
-  category: string,
-  visible: boolean
+  category: string
 }
 
 const { Title } = Typography;

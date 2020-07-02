@@ -1,26 +1,26 @@
 // mock games table
 
 import { mockGames } from './fixtures.mjs';
+import { v4 as uuidv4 } from 'uuid';
 
 class GamesTable {
   constructor(games) {
     this.games = Array.from(games);
   }
 
-  showGame(gameId) {
-    const game = this.games.find(o => o.id === gameId);
-    game.visible = true;
-    return game;
+  addGame(name, category) {
+    const newGame = {
+      id: uuidv4(),
+      category,
+      name
+    };
+
+    this.games.push(newGame);
+    return newGame;
   }
 
-  hideGame(gameId) {
-    const game = this.games.find(o => o.id === gameId);
-    game.visible = false;
-    return game;
-  }
-
-  get activeGames() {
-    return this.games.filter(o => o.visible);
+  get allGames() {
+    return this.games;
   }
 
   debug() {

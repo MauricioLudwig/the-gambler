@@ -33,7 +33,6 @@ const mockGames = [{
 
 mockGames.forEach(o => {
   o.id = uuidv4();
-  o.visible = true;
 });
 
 const mockUser1 = {

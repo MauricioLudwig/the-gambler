@@ -10,7 +10,7 @@ import chalk from 'chalk';
 
 // DB + routes
 import { db } from './db/index.mjs';
-import './db/games-table.mjs';
+import { gamesTable } from './db/games-table.mjs';
 import usersRouter from './routers/users.mjs';
 import gamesRouter from './routers/games.mjs';
 import messagesRouter from './routers/messages.mjs';
@@ -83,6 +83,13 @@ io.on('connection', (socket) => {
     db.raiseUserLevels();
     io.sockets.emit('level-raised');
     log(`level raised for all clients.`);
+  });
+
+  socket.on('add-new-game', (data) => {
+    const { name, category } = data;
+    const newGame = gamesTable.addGame(name, category);
+    io.sockets.emit('new-game-added', newGame);
+    log(`new game ${name} added.`);
   });
 });
 

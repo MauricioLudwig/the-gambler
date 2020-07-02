@@ -2,6 +2,8 @@ export const gamesActionTypes = {
   GET_GAMES_REQUEST: 'GET_GAMES_REQUEST',
   GET_GAMES_SUCCESS: 'GET_GAMES_SUCCESS',
   GET_GAMES_FAILURE: 'GET_GAMES_FAILURE',
+
+  ADD_GAME: 'ADD_GAME',
 }
 
 export const getGamesRequest = () => ({
@@ -16,4 +18,9 @@ export const getGamesSuccess = data => ({
 export const getGamesFailure = error => ({
   type: gamesActionTypes.GET_GAMES_FAILURE,
   payload: error
+});
+
+export const addGame = data => ({
+  type: gamesActionTypes.ADD_GAME,
+  payload: data
 });
