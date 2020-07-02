@@ -5,7 +5,7 @@ interface Props {
   messages: Message[]
 }
 
-interface Message {
+export interface Message {
   id: string,
   text: string,
   read: boolean,
@@ -19,8 +19,8 @@ const Messages: FunctionComponent<Props> = ({ messages }) => {
     <div className="messages-list">
       <p className="messages-list__count">Messages ({messages.length})</p>
       {
-        messages.sort(sortByDate).map(({ id, ...rest }) => (
-          <MessageListItem key={id} {...rest} />
+        messages.sort(sortByDate).map((message) => (
+          <MessageListItem key={message.id} {...message} />
         ))
       }
     </div>

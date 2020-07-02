@@ -7,7 +7,7 @@ interface Props {
   games: Game[]
 }
 
-interface Game {
+export interface Game {
   id: number,
   name: string,
   category: string

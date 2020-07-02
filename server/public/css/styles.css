@@ -70,10 +70,8 @@ input {
 }
 
 .btn {
-	box-shadow:inset 0px 1px 0px 0px #9acc85;
-	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
-	background-color:#74ad5a;
-	border:1px solid #3b6e22;
+	background-color: steelblue;
+	border:1px solid #0c2c3b;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
@@ -82,11 +80,6 @@ input {
 	font-weight:bold;
 	padding:6px 12px;
 	text-decoration:none;
-}
-
-.btn:hover {
-	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-	background-color:#68a54b;
 }
 
 .btn:active {
