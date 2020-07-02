@@ -6,8 +6,8 @@ const router = new express.Router();
 
 router.get('/games', auth, (req, res) => {
   try {
-    const activeGames = gamesTable.activeGames;
-    res.send(activeGames);
+    const games = gamesTable.allGames;
+    res.send(games);
   } catch ({ message }) {
     res.status(400).send({ error: message });
   }

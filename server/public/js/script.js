@@ -40,4 +40,13 @@ $(document).ready(() => {
   $('#raise-level-btn').on('click', function () {
     socket.emit('raise-level');
   });
+
+  $('#new-game-form').on('submit', function (e) {
+    e.preventDefault();
+
+    const name = $('#game-name').val();
+    const category = $('#game-category').val();
+
+    socket.emit('add-new-game', { name, category });
+  });
 });
