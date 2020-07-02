@@ -57,14 +57,15 @@ io.on('connection', (socket) => {
     socket.join('admin'); // pretend admin entry since admin page lacks authentication feature
   }
 
-  socket.on('disconnect', () => {
-    log(`user disconnected: ${socket.id}.`);
-    const user = db.removeSocketId(socket.id);
+  // TODO fix!
+  // socket.on('disconnect', () => {
+  //   log(`user disconnected: ${socket.id}.`);
+  //   const user = db.removeSocketId(socket.id);
 
-    if (user) {
-      io.to('admin').emit('user-disconnected', { userId: user.id });
-    }
-  });
+  //   if (user) {
+  //     io.to('admin').emit('user-disconnected', { userId: user.id });
+  //   }
+  // });
 
   socket.on('send-message', (data) => {
     const { userId, message } = data;

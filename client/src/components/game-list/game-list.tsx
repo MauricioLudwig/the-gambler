@@ -1,11 +1,22 @@
-import React from 'react';
-import * as _ from 'lodash';
+import React, { FunctionComponent } from 'react';
+import _ from 'lodash';
 import { Typography } from 'antd';
 import GameListItem from '../game-list-item';
 
+interface Props {
+  games: Game[]
+}
+
+interface Game {
+  id: number,
+  name: string,
+  category: string,
+  visible: boolean
+}
+
 const { Title } = Typography;
 
-const GameList = ({ games }) => {
+const GameList: FunctionComponent<Props> = ({ games }) => {
   const gamesByCategory = _.groupBy(games, 'category');
 
   return (

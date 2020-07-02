@@ -64,9 +64,33 @@ const mockUser1 = {
   token: []
 };
 
+const mockUser2 = {
+  id: '456',
+  name: 'David Gemmell',
+  email: 'david.gemmell@gmail.com',
+  password: 'druss',
+  level: 1,
+  messages: [{
+    text: 'Message from administrator',
+    read: false
+  }, {
+    text: 'Drenai',
+    read: false
+  }, {
+    text: 'A cynic by experience, a romantic by inclination and now a hero by necessity.',
+    read: true
+  }],
+  token: []
+}
+
 mockUser1.messages.forEach(o => {
   o.id = uuidv4();
   o.date = new Date();
 });
 
-export { mockUser1, mockGames };
+mockUser2.messages.forEach(o => {
+  o.id = uuidv4();
+  o.date = new Date();
+});
+
+export { mockUser1, mockUser2, mockGames };

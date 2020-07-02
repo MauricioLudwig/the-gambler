@@ -16,6 +16,11 @@ const authReducer = (state = initialState, { type, payload }) => {
       return {
         ...initialState
       }
+    case authActionTypes.GET_PROFILE_SUCCESS:
+      return {
+        ...state,
+        user: { ...payload }
+      }
     case authActionTypes.RAISE_LEVEL:
       return {
         ...state,

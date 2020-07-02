@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { createLoadingSelector, createErrorMessageSelector } from '../../utilities/api-selectors';
-import { signIn } from '../../services/auth';
 import { Typography, Form, Input, Button } from 'antd';
 import { loginSchema, schemaValidator } from '../../utilities/schemas';
 import Feedback from '../../components/feedback';
@@ -16,16 +12,7 @@ interface FieldErrors {
   [key: string]: string[]
 };
 
-const Login = (props) => {
-  const {
-    loading,
-    loginError,
-    signIn,
-    history
-  } = props;
-
-  console.log('props', props);
-
+const Login = ({ loginLoading, loginError, signIn }) => {
   const { Title } = Typography;
 
   const [values, setValue] = useState<FormValues>({
@@ -68,6 +55,12 @@ const Login = (props) => {
     })
   };
 
+  const onKeyDownHandler = (e) => {
+    if (e.keyCode === 13) {
+      loginHandler();
+    }
+  }
+
   const loginHandler = async () => {
     const [validForm, errors] = await schemaValidator(loginSchema, { ...values });
 
@@ -77,10 +70,7 @@ const Login = (props) => {
     }
 
     const { email, password } = values;
-    signIn(email, password).then(() => {
-      history.push('/');
-    }).catch((e) => {
-    });
+    signIn(email, password);
   }
 
   return (
@@ -95,6 +85,7 @@ const Login = (props) => {
               value={values.email}
               onChange={onChangeHandler}
               onBlur={onBlurHandler}
+              onKeyDown={onKeyDownHandler}
             />
             <Feedback errors={fieldErrors['email'] || {}} />
           </Form.Item>
@@ -105,20 +96,18 @@ const Login = (props) => {
               value={values.password}
               onChange={onChangeHandler}
               onBlur={onBlurHandler}
+              onKeyDown={onKeyDownHandler}
             />
             <Feedback errors={fieldErrors['password'] || {}} />
           </Form.Item>
           <Form.Item style={{ textAlign: 'center' }}>
-            <Button loading={loading} onClick={loginHandler}>
+            <Button loading={loginLoading} onClick={loginHandler}>
               {
-                loading ? 'attempting login...' : 'Login'
+                loginLoading ? 'attempting login...' : 'Login'
               }
             </Button>
           </Form.Item>
         </Form>
-        {
-          loginError && <Title level={4}>{loginError}</Title>
-        }
       </div>
       <footer>
         <p>the gambler @ {new Date().getFullYear()}</p>
@@ -127,19 +116,4 @@ const Login = (props) => {
   );
 };
 
-const loading = createLoadingSelector(['LOGIN']);
-const loginError = createErrorMessageSelector(['LOGIN']);
-
-const mapStateToProps = state => ({
-  loading: loading(state),
-  loginError: loginError(state)
-});
-
-const mapDispatchToProps = dispatch => ({
-  signIn: (email, password) => dispatch(signIn(email, password))
-});
-
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login));
+export default Login;

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import MessageListItem from './message-list-item';
+import React, { FunctionComponent } from 'react';
+import MessageListItem from '../message-list-item';
 
 interface Props {
   messages: Message[]
@@ -12,7 +12,7 @@ interface Message {
   date: string
 }
 
-const Messages: React.FC<Props> = ({ messages }) => {
+const Messages: FunctionComponent<Props> = ({ messages }) => {
   const sortByDate = (a: Message, b: Message): number => new Date(b.date).getTime() - new Date(a.date).getTime();
 
   return (

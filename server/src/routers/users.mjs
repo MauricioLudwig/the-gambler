@@ -5,10 +5,12 @@ import auth from '../middleware/auth.mjs';
 
 const router = new express.Router();
 
-router.get('/users/me', auth, (req, res) => {
+router.get('/users/profile', auth, (req, res) => {
   try {
-    const user = db.getUser(req.user.id);
-    res.status(200).send(user);
+    const { name, email, level } = db.getUser(req.user.id);
+    res.status(200).send({
+      name, email, level
+    });
   } catch ({ message }) {
     res.status(400).send({ error: message });
   }

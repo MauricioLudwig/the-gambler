@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
 import { Layout, Button, Typography } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
-import MessageList from '../../components/message-list';
+import MessageList from '../../components/message-list/message-list-container';
 import GamesList from '../../components/game-list/game-list-container';
 
 const { Header, Content } = Layout;
@@ -11,26 +11,23 @@ const { Title } = Typography;
 const Home = (props) => {
   const {
     user,
-    messages,
-    history,
-    signOut,
-    signinOut,
+    loadingInitialData,
+    addMessage,
+    getProfile,
     getMessages,
     getGames,
-    loadMessages,
-    addMessage,
-    raiseLevel
+    raiseLevel,
+    signOut
   } = props;
 
   const fetchInitialData = async () => {
-    await Promise.all([getGames(), getMessages()]);
+    await Promise.all([getGames(), getMessages(), getProfile()]);
   };
 
   useEffect(() => {
     fetchInitialData();
     const socket = socketIOClient(`http://localhost:3000/?token=${user.token}`);
     socket.on('new-message', data => {
-      console.log('new message', data);
       addMessage(data);
     });
 
@@ -39,24 +36,16 @@ const Home = (props) => {
     });
   }, []);
 
-  const signoutHandler = () => {
-    signOut().then(() => {
-      history.push('/login');
-    }).catch(() => {
-      alert('Unexpected error');
-    });
-  };
-
   return (
     <Layout>
       <Header className="header">
         <Title level={3}>
           The Gambler
+          <span className="header__subtitle"> ...a fyodor production</span>
         </Title>
         <div>
           <Button
-            onClick={signoutHandler}
-            disabled={signinOut}
+            onClick={signOut}
             shape="round"
             icon={<LogoutOutlined />}
           />
@@ -64,11 +53,8 @@ const Home = (props) => {
       </Header>
       <Layout>
         <Content className="main-container">
-          <div>
-            {user.user.level}
-          </div>
           <div className="messages-container">
-            <MessageList messages={messages} />
+            <MessageList />
           </div>
           <div className="games-container">
             <GamesList />

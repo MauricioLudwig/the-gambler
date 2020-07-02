@@ -1,14 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import '../middleware/axios-interceptor';
 
 import AuthenticatedRoute from './authenticated-route';
 import PublicRoute from './public-route';
 
 import Login from '../pages/login/login-container';
 import Home from '../pages/home/home-container';
-import NotFound from '../pages/not-found';
+import NotFound from '../pages/not-found/not-found';
 
 const AppRouter = () => (
   <Router history={createBrowserHistory()}>

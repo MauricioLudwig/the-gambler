@@ -2,7 +2,7 @@
 
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
-import { mockUser1 } from './fixtures.mjs';
+import { mockUser1, mockUser2 } from './fixtures.mjs';
 
 class DB {
   constructor(...initialUsers) {
@@ -97,6 +97,6 @@ class DB {
   }
 }
 
-const db = new DB(mockUser1);
+const db = new DB(mockUser1, mockUser2);
 
 export { db };
