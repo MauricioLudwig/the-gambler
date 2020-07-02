@@ -2,7 +2,7 @@
   display: flex;
   padding: $s-size;
   overflow-x: scroll;
-  max-height: calc(100vh - #{$navbar-height});
+  max-height: calc(100vh - #{$navbar-height * 2});
   
   > div {
     margin-right: $xs-size;

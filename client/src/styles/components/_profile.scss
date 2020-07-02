@@ -1,0 +1,13 @@
+.profile {
+  display: flex;
+  align-items: center;
+  padding: 0 $s-size;
+  height: $navbar-height;
+  background: $cloud;
+
+  h1 {
+    color: #fff;
+    font-size: 14px;
+    margin: 0;
+  }
+}

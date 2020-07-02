@@ -5,6 +5,7 @@ import { Layout, Button, Typography } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import MessageList from '../../components/message-list/message-list-container';
 import GamesList from '../../components/game-list/game-list-container';
+import Profile from '../../components/profile/profile-container';
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
@@ -63,6 +64,7 @@ const Home = (props) => {
             ) : (
               <Content className="main-container">
                 <div className="messages-container">
+                  <Profile />
                   <MessageList />
                 </div>
                 <div className="games-container">
