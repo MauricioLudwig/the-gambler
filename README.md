@@ -63,7 +63,7 @@ Unfortunately I've had to omit unit testing altogether as well as having taken s
 
 **Minute details**
 
-To the observant, you'll notice minute details such as no error message rendered when inserting the wrong email/password combination. Of course such bugs are, in due time, expunged, but, for now they stand, like thorns mockingly pricking at the skin. 
+To the observant, you'll notice minute details such as no error message rendered when inserting the wrong email/password combination or hard-coded routes. Of course such bugs/malpractices are, in due time, expunged, but, for now they stand, like thorns mockingly pricking at the skin. 
 
 ### Screenshots
 
