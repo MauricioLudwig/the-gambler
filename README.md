@@ -36,4 +36,24 @@ fixtures data located here -> ./server/src/db/fixtures.mjs
 ### Assumptions
 ...
 
+### Screenshots
 
+Login
+
+![Alt text](/screenshots/login.PNG?raw=true "Login")
+
+Login mobile
+
+![Alt text](/screenshots/login-mobile.PNG?raw=true "Login mobile")
+
+Home
+
+![Alt text](/screenshots/home.PNG?raw=true "Home")
+
+Home mobile
+
+![Alt text](/screenshots/home-mobile.PNG?raw=true "Home mobile")
+
+Admin
+
+![Alt text](/screenshots/admin.PNG?raw=true "Admin")
