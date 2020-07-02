@@ -55,6 +55,7 @@ io.on('connection', (socket) => {
   } else {
     log(`new user connected (admin): ${socket.id}.`);
     socket.join('admin'); // pretend admin entry since admin page lacks authentication feature
+    io.to('admin').emit('game-list', gamesTable.allGames);
   }
 
   socket.on('disconnect', () => {
@@ -88,8 +89,19 @@ io.on('connection', (socket) => {
   socket.on('add-new-game', (data) => {
     const { name, category } = data;
     const newGame = gamesTable.addGame(name, category);
-    io.sockets.emit('new-game-added', newGame);
     log(`new game ${name} added.`);
+
+    io.sockets.emit('new-game-added', newGame);
+    io.to('admin').emit('game-list', gamesTable.allGames);
+  });
+
+  socket.on('remove-game', (data) => {
+    const { gameId } = data;
+    gamesTable.removeGame(gameId);
+    log(`game by id ${gameId} removed.`);
+
+    io.sockets.emit('game-removed', gameId);
+    io.to('admin').emit('game-list', gamesTable.allGames);
   });
 });
 

@@ -21,17 +21,17 @@
       <!-- raise level -->
       <div class="card card--horizontal">
         <p>Raise level of all players</p>
-        <button id="raise-level-btn">Raise level</button>
+        <button id="raise-level-btn" class="btn">Raise level</button>
       </div>
 
       <!-- send message to client -->
       <div class="card">
         <p>Send message to client</p>
-        <small style="font-size: 12px; color: darkgray">List of clients is updated as users log in/out</small>
+        <small class="subtext">List of clients is updated as users log in/out</small>
         <form id="message-form" class="form--horizontal">
           <select id="client-list-picker"></select>
           <input id="message" required placeholder="your message..." />
-          <button type="submit">Send message</button>
+          <button type="submit" class="btn">Send message</button>
         </form>
       </div>
 
@@ -41,7 +41,17 @@
         <form id="new-game-form" class="form--horizontal">
           <input id="game-name" required placeholder="name" />
           <input id="game-category" required placeholder="category" />
-          <button type="submit">Add new game</button>
+          <button type="submit" class="btn">Add new game</button>
+        </form>
+      </div>
+
+      <!-- remove game -->
+      <div class="card">
+        <p>Remove game</p>
+        <small class="subtext">List of games will update as you add/remove them (here & for the active clients)</small>
+        <form id="remove-game-form" class="form--horizontal">
+          <select id="game-list-picker"></select>
+          <button type="submit" class="btn">Remove game</button>
         </form>
       </div>
 

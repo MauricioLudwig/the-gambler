@@ -6,6 +6,8 @@ const gamesReducer = (state = [], { type, payload }) => {
       return [...state, ...payload];
     case gamesActionTypes.ADD_GAME:
       return [...state, payload];
+    case gamesActionTypes.REMOVE_GAME:
+      return state.filter(o => o.id !== payload);
     default:
       return state;
   }

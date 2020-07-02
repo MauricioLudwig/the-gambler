@@ -25,6 +25,7 @@ header {
   display: flex;
   justify-content: center;
 
+  background: whitesmoke;
   height: 100%;
   min-height: calc(100vh - 64px);
 }
@@ -35,6 +36,7 @@ header {
 }
 
 .card {
+  background: #fff;
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   padding: 1.5rem;
@@ -60,4 +62,34 @@ input {
   border-radius: .2rem;
   border: 1px solid #ced4da;
   padding: .25rem .5rem;
+}
+
+.subtext {
+  font-size: 12px;
+  color: darkgray;
+}
+
+.btn {
+	box-shadow:inset 0px 1px 0px 0px #9acc85;
+	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+	background-color:#74ad5a;
+	border:1px solid #3b6e22;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 12px;
+	text-decoration:none;
+}
+
+.btn:hover {
+	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+	background-color:#68a54b;
+}
+
+.btn:active {
+	position:relative;
+	top:1px;
 }
