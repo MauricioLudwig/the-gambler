@@ -7,8 +7,7 @@ const router = new express.Router();
 
 router.get('/users/me', auth, (req, res) => {
   try {
-    const { user: id } = req;
-    const user = db.getUser(id);
+    const user = db.getUser(req.user.id);
     res.status(200).send(user);
   } catch ({ message }) {
     res.status(400).send({ error: message });
@@ -21,7 +20,6 @@ router.post('/users/login', (req, res) => {
     const user = db.validateUser(email, password);
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
     db.saveToken(user.id, token);
-    db.debug();
     res.send({ email: user.email, token });
   } catch ({ message }) {
     res.status(400).send({ error: message });
@@ -32,7 +30,6 @@ router.post('/users/logout', auth, (req, res) => {
   try {
     const { user: { id }, token } = req;
     db.removeToken(id, token);
-    db.debug();
     res.send();
   } catch ({ message }) {
     res.status(400).send({ error: message });

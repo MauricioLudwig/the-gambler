@@ -1,25 +1,15 @@
-// mock db
+// mock db (users + messages)
 
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import { mockUser1 } from './fixtures.mjs';
 
 class DB {
   constructor(...initialUsers) {
-    const newUsers = initialUsers.map(({ id, email, password, messages }) => ({
-      id,
-      email,
-      password: bcrypt.hashSync(password, 10),
-      level: 1,
-      messages: messages.map(({ text, read }) => ({
-        id: uuidv4(),
-        text,
-        read,
-        date: new Date()
-      })),
-      token: []
-    }));
-
-    this.users = [...newUsers];
+    this.users = Array.from(initialUsers.map(o => ({
+      ...o,
+      password: bcrypt.hashSync(o.password, 10)
+    })));
   }
 
   validateUser(email, password) {
@@ -71,6 +61,12 @@ class DB {
     user.socketId = socketId;
   }
 
+  removeSocketId(socketId) {
+    const user = this.users.find(o => o.socketId === socketId);
+    delete user.socketId;
+    return user;
+  }
+
   findUser(id, token) {
     return this.users.find(o => o.id === id && o.token.some(t => t === token));
   }
@@ -90,37 +86,16 @@ class DB {
     return { ...rest };
   }
 
+  raiseUserLevels() {
+    this.users.forEach(user => {
+      user.level = user.level + 1;
+    });
+  }
+
   debug() {
-    console.log(this.users);
+    console.log('users', this.users);
   }
 }
-
-const mockUser1 = {
-  id: '123',
-  name: 'Mikhail Bulgakov',
-  email: 'bulgakov@gmail.com',
-  password: 'master',
-  level: 1,
-  messages: [{
-    text: 'Level raised',
-    read: false
-  }, {
-    text: 'Behemoth',
-    read: true
-  }, {
-    text: 'Message from administrator',
-    read: false
-  }, {
-    text: 'Message from administrator',
-    read: false
-  }, {
-    text: 'Level raised',
-    read: true
-  }, {
-    text: 'Margarita',
-    read: false
-  }]
-};
 
 const db = new DB(mockUser1);
 

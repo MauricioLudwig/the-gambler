@@ -36,4 +36,37 @@ mockGames.forEach(o => {
   o.visible = true;
 });
 
-export { mockGames };
+const mockUser1 = {
+  id: '123',
+  name: 'Mikhail Bulgakov',
+  email: 'bulgakov@gmail.com',
+  password: 'master',
+  level: 1,
+  messages: [{
+    text: 'Level raised',
+    read: false
+  }, {
+    text: 'Behemoth',
+    read: true
+  }, {
+    text: 'Message from administrator',
+    read: false
+  }, {
+    text: 'Message from administrator',
+    read: false
+  }, {
+    text: 'Level raised',
+    read: true
+  }, {
+    text: 'Margarita',
+    read: false
+  }],
+  token: []
+};
+
+mockUser1.messages.forEach(o => {
+  o.id = uuidv4();
+  o.date = new Date();
+});
+
+export { mockUser1, mockGames };
