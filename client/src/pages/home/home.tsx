@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Spinner from 'react-spinkit';
 import socketIOClient from 'socket.io-client';
 import { Layout, Button, Typography } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
@@ -52,14 +53,24 @@ const Home = (props) => {
         </div>
       </Header>
       <Layout>
-        <Content className="main-container">
-          <div className="messages-container">
-            <MessageList />
-          </div>
-          <div className="games-container">
-            <GamesList />
-          </div>
-        </Content>
+        {
+          loadingInitialData
+            ? (
+              <div className="container--loader">
+                <Spinner name="cube-grid" fadeIn={0} />
+                <p>Fetching profile...</p>
+              </div>
+            ) : (
+              <Content className="main-container">
+                <div className="messages-container">
+                  <MessageList />
+                </div>
+                <div className="games-container">
+                  <GamesList />
+                </div>
+              </Content>
+            )
+        }
       </Layout>
     </Layout>
   );
