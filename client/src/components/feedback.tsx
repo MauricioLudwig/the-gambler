@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface Props {
   errors?: Record<string, string>
 };
 
-const Feedback: React.FC<Props> = ({ errors }) => {
+const Feedback: FunctionComponent<Props> = ({ errors }) => {
   if (Object.keys(errors).length === 0) {
     return (null);
   }

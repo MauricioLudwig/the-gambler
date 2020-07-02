@@ -1,14 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 import { Card } from 'antd';
-import * as moment from 'moment';
+import moment from 'moment';
 import classNames from 'classnames';
 
 const MessageListItem = ({ text, read, date }) => {
   const messagesClasses = classNames('messages-list-item', {
     'messages-list-item--read': read
   });
-
-  console.log('test', new Date(date).getTime(), typeof date);
 
   return (
     <Card className={messagesClasses} title={text}>

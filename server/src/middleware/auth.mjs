@@ -7,8 +7,6 @@ const auth = (req, res, next) => {
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
     const user = db.findUser(id, token);
 
-    console.log('TOKEN', token, id, user);
-
     if (!user) {
       throw new Error();
     }
@@ -18,8 +16,7 @@ const auth = (req, res, next) => {
 
     next();
   } catch (e) {
-    console.log('e', e);
-    res.status(401).send({ error: 'unauthorized' });
+    res.status(401).send({ error: 'unauthorized request' });
   }
 };
 

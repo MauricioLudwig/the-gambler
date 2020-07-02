@@ -7,7 +7,11 @@ export const authActionTypes = {
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
   LOGOUT_FAILURE: 'LOGOUT_FAILURE',
 
-  RAISE_LEVEL: 'RAISE_LEVEL'
+  GET_PROFILE_REQUEST: 'GET_PROFILE_REQUEST',
+  GET_PROFILE_SUCCESS: 'GET_PROFILE_SUCCESS',
+  GET_PROFILE_FAILURE: 'GET_PROFILE_FAILURE',
+
+  RAISE_LEVEL: 'RAISE_LEVEL',
 };
 
 export const loginRequest = () => ({
@@ -25,7 +29,7 @@ export const loginFailure = error => ({
 });
 
 export const logoutRequest = () => ({
-  type: authActionTypes.LOGIN_REQUEST
+  type: authActionTypes.LOGOUT_REQUEST
 });
 
 export const logoutSuccess = data => ({
@@ -34,7 +38,21 @@ export const logoutSuccess = data => ({
 });
 
 export const logoutFailure = error => ({
-  type: authActionTypes.LOGIN_FAILURE,
+  type: authActionTypes.LOGOUT_FAILURE,
+  payload: error
+});
+
+export const getProfileRequest = () => ({
+  type: authActionTypes.GET_PROFILE_REQUEST
+});
+
+export const getProfileSuccess = data => ({
+  type: authActionTypes.GET_PROFILE_SUCCESS,
+  payload: data
+});
+
+export const getProfileFailure = error => ({
+  type: authActionTypes.GET_PROFILE_FAILURE,
   payload: error
 });
 

@@ -3,7 +3,7 @@ export const messagesActionTypes = {
   GET_MESSAGES_SUCCESS: 'GET_MESSAGES_SUCCESS',
   GET_MESSAGES_FAILURE: 'GET_MESSAGES_FAILURE',
 
-  ADD_MESSAGE: 'ADD_MESSAGE'
+  ADD_MESSAGE: 'ADD_MESSAGE',
 };
 
 export const getMessagesRequest = () => ({

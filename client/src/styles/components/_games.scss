@@ -3,8 +3,8 @@
 
   > h4 {
     color: $steel;
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    font-size: $n-size;
+    margin-bottom: $n-size;
   }
 }
 
@@ -14,6 +14,6 @@
   align-items: center;
 
   > small {
-    font-size: 1rem;
+    font-size: $n-size;
   }
 }
