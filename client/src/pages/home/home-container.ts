@@ -5,7 +5,7 @@ import { getMessages } from '../../services/messages';
 import { getGames } from '../../services/games';
 import { addMessage } from '../../actions/messages';
 import { raiseLevel } from '../../actions/auth';
-import { addGame } from '../../actions/games';
+import { addGame, removeGame } from '../../actions/games';
 import Home from './home';
 
 const loadingInitialData = createLoadingSelector([
@@ -29,5 +29,6 @@ export default connect(
     raiseLevel,
     signOut,
     addGame,
+    removeGame
   }
 )(Home);

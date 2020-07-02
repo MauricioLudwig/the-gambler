@@ -19,6 +19,10 @@ class GamesTable {
     return newGame;
   }
 
+  removeGame(gameId) {
+    this.games = this.games.filter(o => o.id !== gameId);
+  }
+
   get allGames() {
     return this.games;
   }

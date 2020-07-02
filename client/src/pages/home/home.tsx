@@ -20,7 +20,8 @@ const Home = (props) => {
     getGames,
     raiseLevel,
     signOut,
-    addGame
+    addGame,
+    removeGame
   } = props;
 
   const fetchInitialData = async () => {
@@ -40,6 +41,10 @@ const Home = (props) => {
 
     socket.on('new-game-added', (data) => {
       addGame(data);
+    });
+
+    socket.on('game-removed', (data) => {
+      removeGame(data);
     });
 
     return () => {

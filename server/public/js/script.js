@@ -12,6 +12,22 @@ $(document).ready(() => {
     renderClientList();
   });
 
+  socket.on('game-list', (data) => {
+    renderGamesList(data);
+  });
+
+  const renderGamesList = (games) => {
+    const gameList = $('#game-list-picker');
+    gameList.empty();
+
+    games.forEach((game) => {
+      $('<option />', {
+        value: game.id,
+        html: game.name
+      }).appendTo(gameList);
+    });
+  };
+
   const renderClientList = () => {
     $('#client-list-picker').empty();
 
@@ -48,5 +64,18 @@ $(document).ready(() => {
     const category = $('#game-category').val();
 
     socket.emit('add-new-game', { name, category });
+  });
+
+  $('#remove-game-form').on('submit', function (e) {
+    e.preventDefault();
+
+    const gameId = $('#game-list-picker').find(':selected').val();
+
+    if (!gameId) {
+      alert('you must select a game!');
+      return;
+    }
+
+    socket.emit('remove-game', { gameId });
   });
 });
